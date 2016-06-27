@@ -10,11 +10,10 @@ import (
 
 func hello(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, "Hello world again!\n")
-	var sourceDNS = os.Getenv("COUNT_SOURCE")
-	if sourceDNS == "" {
-		sourceDNS = "web.cloud66.local"
+	var sourceURL = os.Getenv("DATA_SOURCE")
+	if sourceURL == "" {
+		sourceURL = "http://web.cloud66.local:3000/counts"
 	}
-	var sourceURL = fmt.Sprintf("http://%s:3001/counts", sourceDNS)
 	resp, err := http.Get(sourceURL)
 	if err != nil {
 		// handle error
